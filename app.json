@@ -1,0 +1,24 @@
+{
+  "name": "Plex Slack Music Status Webhook",
+  "description": "Use Plex webhooks to keep your status up to date with your playback",
+  "repository": "https://github.com/plexinc/plex-slack-music-notifications",
+  "logo": "https://www.plex.tv/wp-content/themes/plex/img/plex-logo@2x.png",
+  "keywords": ["node"],
+  "addons": [
+    {"plan": "heroku-redis:hobby-dev"}
+  ],
+  "env": {
+    "PAUSE_EMOJI": {
+      "description": "Emoji to use when paused"
+    },
+    "PLAY_EMOJI": {
+      "description": "Emoji to use when playing"
+    },
+    "TOKEN": {
+      "description": "The Slack legacy token (generate on https://api.slack.com/custom-integrations/legacy-tokens)"
+    },
+    "PLAYER": {
+      "description": "The identifier of the Plex player to watch"
+    }
+  }
+}
