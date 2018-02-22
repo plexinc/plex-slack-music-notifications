@@ -5,7 +5,6 @@
   "logo": "https://www.plex.tv/wp-content/themes/plex/img/plex-logo@2x.png",
   "keywords": ["node"],
   "addons": [
-    {"plan": "heroku-redis:hobby-dev"}
   ],
   "env": {
     "PAUSE_EMOJI": {
