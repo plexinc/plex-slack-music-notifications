@@ -10,7 +10,7 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
   var payload = JSON.parse(req.body.payload);
 
   // If the right player is playing a track, display a notification.
-  if (payload.Player.uuid = process.env.PLAYER && payload.Account.id === 1) {
+  if (payload.Player.uuid = process.env.PLAYER && payload.Account.id === 1 && payload.Metadata.type === 'track') {
     const common = `token=${process.env.TOKEN}`;
     if (payload.event == "media.play" || payload.event == "media.resume") {
       request.post({
