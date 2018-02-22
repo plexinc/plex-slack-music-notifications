@@ -1,5 +1,5 @@
 {
-  "name": "Plex Slack Music Status Webhook",
+  "name": "Plex Slack Music Status",
   "description": "Use Plex webhooks to keep your status up to date with your playback",
   "repository": "https://github.com/plexinc/plex-slack-music-notifications",
   "logo": "https://www.plex.tv/wp-content/themes/plex/img/plex-logo@2x.png",
