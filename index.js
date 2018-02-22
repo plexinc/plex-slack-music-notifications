@@ -16,7 +16,7 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
       request.post({
         headers: {'content-type' : 'application/x-www-form-urlencoded'},
         url:     'https://slack.com/api/users.profile.set',
-        body:    `${common}&profile=%7B%22status_text%22%3A%22${payload.Metadata.grandparentTitle}%20-%20${payload.Metadata.title}%22%2C%22status_emoji%22%3A%22%3Amusical_note%3A%22%7D`
+        body:    `${common}&profile=%7B%22status_text%22%3A%22${encodeURIComponent(payload.Metadata.grandparentTitle)}%20-%20${encodeURIComponent(payload.Metadata.title)}%22%2C%22status_emoji%22%3A%22%3Amusical_note%3A%22%7D`
       }, (error, response, body) => {});
     } else if (payload.event == "media.pause" || payload.event == "media.stop") {
       request.post({
