@@ -13,3 +13,7 @@ $ PAUSE_EMOJI=<paused-emoji> PLAY_EMOJI=<playing-emoji> TOKEN=<token> PLAYER=<pl
 ```
 
 Finally, add the webhook to https://app.plex.tv/web/app#!/account/webhooks (it'll be http://localhost:10000).
+
+Alternatively, deploy straight to Heroku now:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
