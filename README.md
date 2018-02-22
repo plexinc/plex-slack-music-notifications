@@ -9,7 +9,7 @@ In order to run this app:
 Then run the app as follows:
 
 ```
-$ EMOJI=<default-emoji> TOKEN=<token> PLAYER=<player> node index.js
+$ PAUSE_EMOJI=<paused-emoji> PLAY_EMOJI=<playing-emoji> TOKEN=<token> PLAYER=<player> node index.js
 ```
 
 Finally, add the webhook to https://app.plex.tv/web/app#!/account/webhooks (it'll be http://localhost:10000).
