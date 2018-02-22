@@ -2,7 +2,9 @@
   "name": "plex-slack-music-notifications",
   "version": "0.0.1",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "start": "node --harmony-async-await index.js"
+  },
   "dependencies": {
     "express": "^4.14.0",
     "multer": "^1.2.1",
