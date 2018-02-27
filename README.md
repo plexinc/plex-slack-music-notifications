@@ -9,8 +9,10 @@ In order to run this app:
 Then run the app as follows:
 
 ```
-$ PAUSE_EMOJI=<paused-emoji> PLAY_EMOJI=<playing-emoji> TOKEN=<token> PLAYER=<player> node index.js
+$ PAUSE_EMOJI=<paused-emoji> PLAY_EMOJI=<playing-emoji> TOKEN=<token> PLAYER=<player> [USERNAME=<username>] node index.js
 ```
+
+> ⚠️ You'll need to use the USERNAME env variable if you're playing music as a shared user.
 
 Finally, add the webhook to https://app.plex.tv/web/app#!/account/webhooks (it'll be http://localhost:10000).
 
