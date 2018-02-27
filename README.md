@@ -12,8 +12,8 @@ In order to run this app:
 Then run the app as follows:
 
 ```
-$ PLAY_EMOJI="plexamp-dark" \
-  PAUSE_EMOJI="plexamp-desaturated" \
+$ PLAY_EMOJI="speaker" \
+  PAUSE_EMOJI="mute" \
   TOKEN=<token> \
   PLAYER=<player>
   [USERNAME=<username>]
