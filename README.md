@@ -12,17 +12,16 @@ In order to run this app:
 Then run the app as follows:
 
 ```
-$ PLAY_EMOJI="speaker" \
-  PAUSE_EMOJI="mute" \
-  TOKEN=<token> \
-  PLAYER=<player>
+$ TOKEN=<token> \
+  PLAYER=<player> \
   [USERNAME=<username>]
   node index.js
 ```
 
 > ⚠️ You'll need to use the USERNAME env variable if you're playing music as a shared user.
 
-Finally, add the webhook to https://app.plex.tv/web/app#!/account/webhooks (it'll be http://localhost:10000).
+Add the webhook to https://app.plex.tv/web/app#!/account/webhooks replacing the `playEmoji` and `pauseEmoji` params with your preferred Slack emoji.
+  * http://localhost:10000?playEmoji=speaker&pauseEmoji=mute
 
 Alternatively, deploy straight to Heroku now:
 
