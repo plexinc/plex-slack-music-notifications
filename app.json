@@ -7,17 +7,21 @@
   "addons": [
   ],
   "env": {
+    "TOKEN": {
+      "description": "The Slack legacy token (generate on https://api.slack.com/custom-integrations/legacy-tokens).",
+      "required": true
+    },
     "PAUSE_EMOJI": {
-      "description": "Emoji to use when paused"
+      "description": "Emoji to use when paused if none provided in querystring.",
+      "required": false
     },
     "PLAY_EMOJI": {
-      "description": "Emoji to use when playing"
-    },
-    "TOKEN": {
-      "description": "The Slack legacy token (generate on https://api.slack.com/custom-integrations/legacy-tokens)"
+      "description": "Emoji to use when playing if none provided in querystring.",
+      "required": false
     },
     "PLAYER": {
-      "description": "The identifier of the Plex player to watch"
+      "description": "The identifier of the Plex player to watch. If not provided, nor in the querystring, any player playing music will be accepted.",
+      "required": false
     }
   }
 }
