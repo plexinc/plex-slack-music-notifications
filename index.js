@@ -13,7 +13,8 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
     payload.Account.title === process.env.USERNAME
   );
 
-  const isValidPlayer = payload.Player.uuid === process.env.PLAYER;
+  const player = req.query.player || process.env.PLAYER;
+  const isValidPlayer = player ? player === payload.Player.uuid : true;
 
   // If the right player is playing a track, display a notification.
   const isValidRequestType = (
