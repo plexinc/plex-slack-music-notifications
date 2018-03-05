@@ -8,9 +8,13 @@ const app = express();
 app.post('/', upload.single('thumb'), function (req, res, next) {
   const payload = JSON.parse(req.body.payload);
 
+  const token = req.query.token || process.env.TOKEN;
+  const username = req.query.username || process.env.USERNAME;
   const isValidUser = (
-    payload.Account.id === 1 ||
-    payload.Account.title === process.env.USERNAME
+    token && (
+      payload.Account.id === 1 ||
+      payload.Account.title === username
+    )
   );
 
   const player = req.query.player || process.env.PLAYER;
@@ -18,8 +22,8 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
 
   // If the right player is playing a track, display a notification.
   const isValidRequestType = (
-    isValidPlayer &&
     isValidUser &&
+    isValidPlayer &&
     payload.Metadata.type === 'track'
   );
 
@@ -36,7 +40,6 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
 
     const playEmoji = req.query.playEmoji || process.env.PLAY_EMOJI || '';
     const pauseEmoji = req.query.pauseEmoji || process.env.PAUSE_EMOJI || '';
-    const token = process.env.TOKEN;
     const statusEmoji = isPlayEvent ? playEmoji : pauseEmoji;
 
     const params = [
