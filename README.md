@@ -40,6 +40,6 @@ $ TOKEN=<token> \
 
 > ⚠️ You'll need to use the USERNAME env variable if you're playing music as a shared user.
 
-- Add a webhook to https://app.plex.tv/web/app#!/account/webhooks, replacing the `playEmoji` and `pauseEmoji` params with your preferred Slack emoji:
+- Add a webhook to https://app.plex.tv/web/app#!/account/webhooks, replacing the `playEmoji`, `pauseEmoji`, and `player` params with your preferred Slack emoji and player identifier:
 
-  `http://localhost:10000?playEmoji=plexamp-outline&pauseEmoji=plexamp-outline-desaturated`
+  `http://localhost:10000?playEmoji=plexamp-outline&pauseEmoji=plexamp-outline-desaturated&player=android-ab73d9387`
