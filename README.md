@@ -1,13 +1,31 @@
-### Before running this app, you'll first need to do the following:
+# Before you begin
 
-- Figure out the identifier of the player you want to control (e.g. in Plexamp look for user:identifier in config.json):
-```
-# grep identifier -m 1 ~/Library/Application\ Support/Plexamp/config.json
-```
-- Make yourself a legacy slack token on [this page](https://api.slack.com/custom-integrations/legacy-tokens).
+### 1. Find the identifier of the player you want to control.
+- In Plexamp, look for `"user": "identifier"` in `config.json`:
 
+   - Mac: `~/Library/Application Support/Plexamp/config.json`.
+   - Windows: `C:\Users\<username>\AppData\Local\Plexamp\Plexamp\config.json`.
 
-### To run the app locally:
+### 2. Create a legacy slack token on [this page](https://api.slack.com/custom-integrations/legacy-tokens).
+
+### 3. Make sure you have Webhooks enabled in PMS.  
+- `Settings` → `Server` → `Network (Show Advanced)` → ☑️ `Webhooks`
+
+---
+
+# Option 1 — Deploy straight to Heroku
+
+### 1. Press this button
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+### 2. Add a Webhook
+- Go to https://app.plex.tv/web/app#!/account/webhooks and create a new webhook with the url for the Heroku app you just deployed:  
+
+  `https://<my-heroku-app>.herokuapp.com`
+
+---
+
+# Option 2 — Run the app locally
 
 - Install [node.js](https://nodejs.org/en/).
 - Clone the repository.
@@ -22,13 +40,6 @@ $ TOKEN=<token> \
 
 > ⚠️ You'll need to use the USERNAME env variable if you're playing music as a shared user.
 
-- Add the webhook to https://app.plex.tv/web/app#!/account/webhooks replacing the `playEmoji` and `pauseEmoji` params with your preferred Slack emoji; e.g.:
-  * http://localhost:10000?playEmoji=speaker&pauseEmoji=mute
+- Add a webhook to https://app.plex.tv/web/app#!/account/webhooks, replacing the `playEmoji` and `pauseEmoji` params with your preferred Slack emoji:
 
-
-### Alternatively, you can deploy straight to Heroku:
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-- Then add a webhook to https://app.plex.tv/web/app#!/account/webhooks with the url for the Heroku app; e.g.:
-  * https://my-plexamp-notifier.herokuapp.com
+  `http://localhost:10000?playEmoji=plexamp-outline&pauseEmoji=plexamp-outline-desaturated`
