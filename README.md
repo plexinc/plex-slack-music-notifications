@@ -13,33 +13,54 @@
 
 ---
 
-# Option 1 — Deploy straight to Heroku
+# Running the app
 
-### 1. Press this button
+## Option 1 — Deploy straight to Heroku
+
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-### 2. Add a Webhook
-- Go to https://app.plex.tv/web/app#!/account/webhooks and create a new webhook with the url for the Heroku app you just deployed:  
-
-  `https://<my-heroku-app>.herokuapp.com`
-
----
-
-# Option 2 — Run the app locally
+## Option 2 — Run the app locally
 
 - Install [node.js](https://nodejs.org/en/).
 - Clone the repository.
 - Install dependencies using `npm install`.
 - Run the app as follows:
 ```
-$ TOKEN=<token> \
-  PLAYER=<player> \
-  [USERNAME=<username>]
-  node index.js
+$ node index.js
 ```
 
-> ⚠️ You'll need to use the USERNAME env variable if you're playing music as a shared user.
+## Option 3 - Run the app in Docker
 
-- Add a webhook to https://app.plex.tv/web/app#!/account/webhooks, replacing the `playEmoji`, `pauseEmoji`, and `player` params with your preferred Slack emoji and player identifier:
+```bash
+docker run \
+  --name slack-music-notify \
+  -p 10000:10000 \
+  -d \
+  plexinc/slack-music-notifications  
+```
+---
 
-  `http://localhost:10000?playEmoji=plexamp-outline&pauseEmoji=plexamp-outline-desaturated&player=android-ab73d9387`
+# Configure the webhook
+
+In your [Plex account settings](https://app.plex.tv/desktop#!/account/webhooks) add a webhook pointing to where the app is running.
+
+- If you used the Heroku deployment button the URL would look like `https://<my-heroku-app>.herokuapp.com`
+- If you are running the app on the same computer as PMS the URL would look like `http://localhost:10000`
+
+## Available parameters
+
+You can provide parameters to the app either via the querystring or environment variables. If both are provided, the querystring value will take precedence.
+
+| Query Parameter | Environment Variable | Description
+| --- | --- | --- |
+| token | TOKEN | Your [Slack token](https://api.slack.com/custom-integrations/legacy-tokens). **Required** for this app to be able to change your status. |
+| username | USERNAME | Your Plex username. **Required** if you are playing music from a shared server, otherwise **optional**. |
+| player | PLAYER | The client identifier of the player you want to send notifications for. If not provided, your status will update from any Plex client your account is playing music on. |
+| playEmoji | PLAY_EMOJI | The Slack emoji to use when playing. Do not include colons, i.e. `plexamp-outline`. If not provided will clear the emoji in your status.  |
+| pauseEmoji | PAUSE_EMOJI | The Slack emoji to use when paused. Do not include colons, i.e. `plexamp-outline-desaturated`. If not provided will clear the emoji in your status. |
+
+### Full example 
+
+```
+https://my-music-webhooks.herokuapp.com?token={slack_token}&username={plex_username}&player={player_client_identifier}&playEmoji={playing_emoji}&pauseEmoji={paused_emoji}
+```
