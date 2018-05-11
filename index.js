@@ -1,11 +1,17 @@
 const express = require('express');
-const request = require('request');
 const multer = require('multer');
+const slack = require('slack');
 
 const upload = multer({ dest: '/tmp/' });
 const app = express();
 
-app.post('/', upload.single('thumb'), function (req, res, next) {
+const asyncRoute = (handler) => {
+  return (req, res, next, ...params) => {
+    return handler.call(this, req, res, next, ...params).catch(next);
+  }
+};
+
+app.post('/', upload.single('thumb'), asyncRoute(async (req, res) => {
   const payload = JSON.parse(req.body.payload);
 
   const token = req.query.token || process.env.TOKEN;
@@ -42,34 +48,33 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
     const pauseEmoji = req.query.pauseEmoji || process.env.PAUSE_EMOJI || '';
     const statusEmoji = isPlayEvent ? playEmoji : pauseEmoji;
 
-    const params = [
-      ['token', token],
-      ['profile', JSON.stringify({
+    // If the user has set protected mode, do not change their status if they
+    // have a status emoji set that is neither the play or pause emoji.
+    const protected = req.query.protected === 'true';
+    if (protected) {
+      const { profile } = await slack.users.profile.get({ token });
+      const { status_emoji } = profile;
+      if (status_emoji && ![playEmoji, pauseEmoji].includes(status_emoji.replace(/:/g, ''))) {
+        console.warn(`Not updating protected status: ${status_emoji}`);
+        return res.sendStatus(200);
+      }
+    }
+
+    await slack.users.profile.set({
+      token,
+      profile: JSON.stringify({
         status_text: statusText,
         status_emoji: statusEmoji.length >= 1 ? `:${statusEmoji}:` : statusEmoji
-      })]
-    ];
-
-    request.post({
-      headers: {'content-type' : 'application/x-www-form-urlencoded'},
-      url: 'https://slack.com/api/users.profile.set',
-      body: params.
-        map(([name, value]) => (
-          `${encodeURIComponent(name)}=${encodeURIComponent(value)}`)
-        ).
-        join('&')
-    }, (error, response, body) => {
-      const parsedBody = !error && response.statusCode === 200 && JSON.parse(body);
-      const errorMessage = error || (!parsedBody.ok && parsedBody.error);
-      const action = isPlayEvent ? 'play' : 'stop';
-
-      if (errorMessage) {
-        console.log(`error posting ${action} status: ${errorMessage}`);
-      }
+      })
     });
   }
 
   res.sendStatus(200);
+}));
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.sendStatus(200); // As a webhook handler we always want to respond with 200
 });
 
 const port = process.env.PORT || 10000;
