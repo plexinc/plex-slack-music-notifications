@@ -3,12 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "debug": "nodemon index.js"
   },
   "dependencies": {
     "express": "^4.14.0",
     "multer": "^1.2.1",
-    "request": "^2.79.0"
+    "slack": "^11.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^1.17.4"
+  }
 }

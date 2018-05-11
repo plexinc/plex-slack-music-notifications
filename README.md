@@ -58,6 +58,7 @@ You can provide parameters to the app either via the querystring or environment 
 | player | PLAYER | The client identifier of the player you want to send notifications for. If not provided, your status will update from any Plex client your account is playing music on. |
 | playEmoji | PLAY_EMOJI | The Slack emoji to use when playing. Do not include colons, i.e. `plexamp-outline`. If not provided will clear the emoji in your status.  |
 | pauseEmoji | PAUSE_EMOJI | The Slack emoji to use when paused. Do not include colons, i.e. `plexamp-outline-desaturated`. If not provided will clear the emoji in your status. |
+| protected | | If `true`, your status will be protected from changes if your status emoji is something other than `playEmoji` or `pauseEmoji` |
 
 ### Full example 
 
