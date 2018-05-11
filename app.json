@@ -9,7 +9,7 @@
   "env": {
     "TOKEN": {
       "description": "The Slack legacy token (generate on https://api.slack.com/custom-integrations/legacy-tokens).",
-      "required": true
+      "required": false
     },
     "PAUSE_EMOJI": {
       "description": "Emoji to use when paused if none provided in querystring.",
