@@ -39,7 +39,7 @@ app.post('/', upload.single('thumb'), asyncRoute(async (req, res) => {
   const isPauseEvent = isValidRequestType &&
     (payload.event == 'media.pause' || payload.event == 'media.stop');
 
-  if (isPlayEvent || isPauseEvent) {    
+  if (isPlayEvent || isPauseEvent) {
     const statusText = isPlayEvent ?
       `${payload.Metadata.originalTitle || payload.Metadata.grandparentTitle} - ${payload.Metadata.title}` :
       '';
