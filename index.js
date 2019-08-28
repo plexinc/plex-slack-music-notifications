@@ -77,7 +77,9 @@ app.use((err, req, res, next) => {
   res.sendStatus(200); // As a webhook handler we always want to respond with 200
 });
 
-const port = process.env.PORT || 10000;
+const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log('listening on port ' + port);
 });
+
+['SIGHUP', 'SIGINT', 'SIGTERM'].forEach((signal) => process.on(signal, () => process.exit()));

@@ -1,20 +1,23 @@
-FROM node:8
+FROM node:10.16-alpine
 
-RUN mkdir -p /usr/src/app
+RUN mkdir -p /app/src
 
-ARG PORT=10000
+ARG PORT=8000
 ARG NODE_ENV=production
 
-ENV PORT=$PORT NODE_ENV=$NODE_ENV PATH=/usr/src/node_modules/.bin:$PATH
+ENV DOCKER=1 PORT=$PORT NODE_ENV=$NODE_ENV PATH=/app/node_modules/.bin:$PATH
 
 EXPOSE $PORT
 
-CMD [ "npm", "start" ]
-
-WORKDIR /usr/src
-COPY package.json package-lock.json ./
-RUN npm install
+WORKDIR /app
+COPY .npmrc .yarnclean .yarnrc package.json yarn.lock ./
+RUN yarn --frozen-lockfile --non-interactive && \
+    yarn cache clean && \
+    rm .npmrc yarn.lock
 ENV PATH /usr/src/node_modules/.bin:$PATH
 
-WORKDIR /usr/src/app
+WORKDIR /app/src
 COPY . .
+RUN rm .npmrc yarn.lock
+
+CMD [ "yarn", "start" ]

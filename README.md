@@ -21,31 +21,33 @@
 
 ## Option 2 — Run the app locally
 
-- Install [node.js](https://nodejs.org/en/).
+- Install [node.js](https://nodejs.org/en/) version 10 or higher, use of [nvm](https://github.com/nvm-sh/nvm) is recommended.
+- Install [yarn](https://yarnpkg.com/lang/en/docs/install/).
 - Clone the repository.
-- Install dependencies using `npm install`.
+- Install dependencies using `yarn`.
 - Run the app as follows:
 ```
-$ node index.js
+$ yarn start
 ```
+
+The app is now running at http://localhost:8000
 
 ## Option 3 - Run the app in Docker
 
 ```bash
-docker run \
-  --name slack-music-notify \
-  -p 10000:10000 \
-  -d \
-  plexinc/slack-music-notifications  
+$ yarn docker:build
+$ yarn docker:start
 ```
----
+
+The app is now running at http://localhost:8000
+
 
 # Configure the webhook
 
 In your [Plex account settings](https://app.plex.tv/desktop#!/account/webhooks) add a webhook pointing to where the app is running.
 
 - If you used the Heroku deployment button the URL would look like `https://<my-heroku-app>.herokuapp.com`
-- If you are running the app on the same computer as PMS the URL would look like `http://localhost:10000`
+- If you are running the app on the same computer as PMS the URL would look like `http://localhost:8000`
 
 ## Available parameters
 

@@ -2,16 +2,21 @@
   "name": "plex-slack-music-notifications",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": "10.16.x"
+  },
   "scripts": {
-    "start": "node index.js",
-    "debug": "nodemon index.js"
+    "debug": "nodemon index.js",
+    "docker:build": "docker build . -t plexinc/slack-music-notifications",
+    "docker:start": "docker run -it --rm -p 8000:8000 --name music-webhooks plexinc/slack-music-notifications",
+    "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.14.0",
-    "multer": "^1.2.1",
-    "slack": "^11.0.0"
+    "express": "4.17.1",
+    "multer": "1.4.2",
+    "slack": "11.0.2"
   },
   "devDependencies": {
-    "nodemon": "^1.17.4"
+    "nodemon": "1.19.1"
   }
 }
