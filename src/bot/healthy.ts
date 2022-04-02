@@ -188,13 +188,12 @@ ${copyToClipboardScript(webhookUrl)}
       // plex.tv account is 705030.
 
       const isValidUser =
-        payload.Account.title === webhookQueryParams.plexUsername;
+        payload.Account.id === webhookQueryParams.plexUserId;
 
       if (!isValidUser) {
-        console.log(JSON.stringify(payload, null, 2));
         return handleNoLongerInterested(
           res,
-          `Payload is for a different account; expected ${webhookQueryParams.plexUsername}, received ${payload.Account.username}`
+          `Payload is for a different account; expected ${webhookQueryParams.plexUserId}, received ${payload.Account.id}`
         );
       }
 
@@ -457,7 +456,7 @@ ${copyToClipboardScript(webhookUrl)}
 
   function refreshWebhookUrl() {
     const formValues = {
-      plexUsername: ${JSON.stringify(userDevices.user.username)},
+      plexUserId: ${JSON.stringify(userDevices.user.id.toString())},
       plexClientIdentifier: deviceSelectElement.value,
       slackUserToken: ${JSON.stringify(slackUserToken)},
       playEmoji: playEmojiInputElement.value,
@@ -603,7 +602,7 @@ ${copyToClipboardScript(webhookUrl)}
 };
 
 interface WebhookQueryParams {
-  plexUsername: string;
+  plexUserId: string;
   plexClientIdentifier: string;
   slackUserToken: string;
   protected: boolean;
@@ -616,20 +615,20 @@ const defaultPauseEmoji = "";
 
 // This function enforces that necessary parameters are present by
 function getWebhookQueryParams(req: Request): WebhookQueryParams | undefined {
-  const plexUsername = req.query.plexUsername;
+  const plexUserId = req.query.plexUserId;
   const plexClientIdentifier = req.query.plexClientIdentifier;
   const slackUserToken = req.query.slackUserToken;
 
   const playEmoji = req.query.playEmoji;
   const pauseEmoji = req.query.pauseEmoji;
 
-  return getIsString(plexUsername) &&
+  return getIsString(plexUserId) &&
     getIsString(plexClientIdentifier) &&
     getIsString(slackUserToken) &&
     getIsString(playEmoji) &&
     getIsString(pauseEmoji)
     ? {
-        plexUsername,
+        plexUserId,
         plexClientIdentifier,
         slackUserToken,
         protected: req.query.protected === "true",

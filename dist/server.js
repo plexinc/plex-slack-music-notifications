@@ -34398,13 +34398,13 @@ function getIsString(value) {
   return typeof value === "string";
 }
 function getWebhookQueryParams(req) {
-  const plexUsername = req.query.plexUsername;
+  const plexUserId = req.query.plexUserId;
   const plexClientIdentifier = req.query.plexClientIdentifier;
   const slackUserToken = req.query.slackUserToken;
   const playEmoji = req.query.playEmoji;
   const pauseEmoji = req.query.pauseEmoji;
-  return getIsString(plexUsername) && getIsString(plexClientIdentifier) && getIsString(slackUserToken) && getIsString(playEmoji) && getIsString(pauseEmoji) ? {
-    plexUsername,
+  return getIsString(plexUserId) && getIsString(plexClientIdentifier) && getIsString(slackUserToken) && getIsString(playEmoji) && getIsString(pauseEmoji) ? {
+    plexUserId,
     plexClientIdentifier,
     slackUserToken,
     protected: req.query.protected === "true",
@@ -34499,10 +34499,9 @@ ${copyToClipboardScript(webhookUrl)}
         if (payload.Metadata.type !== "track") {
           return handleNoLongerInterested(res, `Metadata is not a Track; received ${payload.Metadata.type}`);
         }
-        const isValidUser = payload.Account.title === webhookQueryParams.plexUsername;
+        const isValidUser = payload.Account.id === webhookQueryParams.plexUserId;
         if (!isValidUser) {
-          console.log(JSON.stringify(payload, null, 2));
-          return handleNoLongerInterested(res, `Payload is for a different account; expected ${webhookQueryParams.plexUsername}, received ${payload.Account.username}`);
+          return handleNoLongerInterested(res, `Payload is for a different account; expected ${webhookQueryParams.plexUserId}, received ${payload.Account.id}`);
         }
         const isValidClient = webhookQueryParams.plexClientIdentifier === payload.Player.uuid || webhookQueryParams.plexClientIdentifier === wildcardPlexClientIdentifier;
         if (!isValidClient) {
@@ -34652,7 +34651,7 @@ ${copyToClipboardScript(webhookUrl)}
 
   function refreshWebhookUrl() {
     const formValues = {
-      plexUsername: ${JSON.stringify(userDevices.user.username)},
+      plexUserId: ${JSON.stringify(userDevices.user.id.toString())},
       plexClientIdentifier: deviceSelectElement.value,
       slackUserToken: ${JSON.stringify(slackUserToken2)},
       playEmoji: playEmojiInputElement.value,
