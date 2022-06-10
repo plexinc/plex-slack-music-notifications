@@ -1,13 +1,10 @@
-FROM node:10.16-alpine
+FROM node:16.14-alpine
 
 RUN mkdir -p /app/src
 
-ARG PORT=8000
-ARG NODE_ENV=production
+ARG PORT=8080
 
 ENV DOCKER=1 PORT=$PORT NODE_ENV=$NODE_ENV PATH=/app/node_modules/.bin:$PATH
-
-EXPOSE $PORT
 
 WORKDIR /app
 COPY .npmrc .yarnclean .yarnrc package.json yarn.lock ./
