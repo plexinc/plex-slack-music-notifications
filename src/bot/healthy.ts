@@ -188,7 +188,7 @@ ${copyToClipboardScript(webhookUrl)}
       // plex.tv account is 705030.
 
       const isValidUser =
-        payload.Account.id === webhookQueryParams.plexUserId;
+        payload.Account.id.toString() === webhookQueryParams.plexUserId.toString();
 
       if (!isValidUser) {
         return handleNoLongerInterested(
@@ -487,7 +487,7 @@ ${copyToClipboardScript(webhookUrl)}
     } else {
       parts.push('cleared.');
     }
-    
+
     protectedCheckboxMessageElement.innerHTML = parts.join(', ');
 
     // webhookLinkElement.href = "https://app.plex.tv/desktop/#!/settings/webhooks?newWebhookUrl=" + encodeURIComponent(nextWebhookUrl)
