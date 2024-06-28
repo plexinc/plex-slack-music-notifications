@@ -49,8 +49,11 @@ The following table lists the configurable parameters of the Music-notifications
 | `ingress.ingressClassName` |  | `"ingress-nginx"` |
 | `ingress.url` |  | `""` |
 | `ingress.annotations` |  | `{}` |
-| `secret.externalSecretKey` |  | `"pms/corp/rclone-config"` |
+| `secret.externalSecretKey` |  | `""` |
 | `secret.annotations` |  | `{}` |
+| `secret.secretStore.name` |  | `""` |
+| `secret.secretStore.kind` |  | `""` |
+| `secret.data` |  | `{}` |
 | `replicaCount` |  | `1` |
 | `resources.limits.cpu` |  | `"100m"` |
 | `resources.limits.memory` |  | `"256Mi"` |

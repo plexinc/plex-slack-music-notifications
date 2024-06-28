@@ -21,10 +21,23 @@ ingress:
   annotations: {}
 
 secret:
-  externalSecretKey: pms/corp/rclone-config
+  externalSecretKey: ''
 
   # Custom annotations on the secret
+  # this is only used for the external secrets
   annotations: {}
+
+  # this is only used for the external secrets
+  secretStore:
+    name: ''
+    kind: ''
+
+  # use this to set the values of the secrets directly
+  # these values will be mounted as environment variables and should be base64 encoded
+  data: {}
+  #  SLACK_APP_CLIENT_ID
+  #  SLACK_APP_CLIENT_SECRET
+  #  SLACK_APP_SIGNING_SECRET
 
 replicaCount: 1
 
