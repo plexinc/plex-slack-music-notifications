@@ -24,8 +24,8 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
             type=ref,event=branch,suffix=-{{sha}}
             type=ref,event=pr
-            type=sha,prefix=
-            type=sha
+            type=sha,prefix=,enable={{is_default_branch}}
+            type=sha,enable={{is_default_branch}}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3

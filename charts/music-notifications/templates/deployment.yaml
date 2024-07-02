@@ -27,11 +27,9 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        {{- if .Values.secret.externalSecretKey  }}
         envFrom:
         - secretRef:
             name: {{ include "music-notifications.fullname" . }}
-        {{- end }}
         livenessProbe:
           failureThreshold: 1
           httpGet:
