@@ -29,6 +29,8 @@ jobs:
 
     - name: Set up chart-testing
       uses: helm/chart-testing-action@v2
+      with:
+        version: 3.11.0
 
     - name: Run chart-testing (list-changed)
       id: list-changed
