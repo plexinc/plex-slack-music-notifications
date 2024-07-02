@@ -21,7 +21,7 @@ jobs:
             latest=false
           tags: |
             type=ref,event=branch
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest,enable=true
             type=ref,event=branch,suffix=-{{sha}}
             type=ref,event=pr
             type=sha,prefix=,enable={{is_default_branch}}
