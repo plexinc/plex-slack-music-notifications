@@ -11,12 +11,12 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: 3000
-      {{- if eq .Values.service.type "NodePort" }}
-      nodePort: {{ default "3000" .Values.service.nodePort }}
-      {{- end }}
-      protocol: TCP
-      name: http
+  - port: {{ .Values.service.port }}
+    targetPort: http
+    {{- if eq .Values.service.type "NodePort" }}
+    nodePort: {{ default "3000" .Values.service.nodePort }}
+    {{- end }}
+    protocol: TCP
+    name: http
   selector:
     {{- include "music-notifications.selectorLabels" . | nindent 4 }}

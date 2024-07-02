@@ -24,7 +24,7 @@ spec:
           service:
             name: {{ include "music-notifications.fullname" . }}
             port:
-              number: 3000
+              number: http
   tls:
   - hosts:
     - {{ trimPrefix "https://" .Values.ingress.url }}

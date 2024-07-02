@@ -56,7 +56,6 @@ resources:
 #   cpu: 100m
 #   memory: 128Mi
 
-
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -95,4 +94,3 @@ extraEnv: {}
   # a list of CIDRs that can use the server without authentication
   # this is only used for the first startup of PMS
 #   ALLOWED_NETWORKS: "0.0.0.0/0"
-
