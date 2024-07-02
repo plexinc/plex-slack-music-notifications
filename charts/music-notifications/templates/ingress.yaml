@@ -2,9 +2,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "music-notifications.fullname" . }}-ingress
+  name: {{ include "music-notifications.fullname" . }}
   labels:
-    name: {{ include "music-notifications.fullname" . }}-ingress
+    name: {{ include "music-notifications.fullname" . }}
 {{ include "music-notifications.labels" . | indent 4 }}
 {{- with .Values.ingress.annotations }}
   annotations:
@@ -28,5 +28,5 @@ spec:
   tls:
   - hosts:
     - {{ trimPrefix "https://" .Values.ingress.url }}
-    secretName: {{ include "music-notifications.fullname" . }}-ingress-lets-encrypt
+    secretName: {{ include "music-notifications.fullname" . }}-le
 {{- end -}}
