@@ -17,8 +17,14 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: plexinc/slack-music-notifications
+          flavor: |
+            latest=false
           tags: |
             type=ref,event=branch
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=ref,event=branch,suffix=-{{sha}}
+            type=ref,event=pr
+            type=sha,prefix=
             type=sha
 
       - name: Set up QEMU
