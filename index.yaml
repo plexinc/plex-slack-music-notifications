@@ -3,6 +3,24 @@ entries:
   music-notifications:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2024-07-18T16:54:51.921322003Z"
+    description: A Helm chart for deploying the Slack Music Notifications app
+    digest: 1efff5240b187b685a00e4bd19f77c3c2e8f464f277d1aa9f0f32cd5f92c840b
+    home: https://www.plex.tv
+    icon: https://www.plex.tv/wp-content/themes/plex/assets/img/favicons/plex-152.png
+    keywords:
+    - plex
+    - music
+    - slack
+    name: music-notifications
+    sources:
+    - https://github.com/plexinc/plex-slack-music-notifications
+    type: application
+    urls:
+    - https://github.com/plexinc/plex-slack-music-notifications/releases/download/helm-chart-0.1.3/music-notifications-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2024-07-02T19:29:10.523794791Z"
     description: A Helm chart for deploying the Slack Music Notifications app
     digest: 767384dde04d008cfcb25e50d0367d455a0955d517a4e53257d3ca1d81a8b2cd
@@ -37,4 +55,4 @@ entries:
     urls:
     - https://github.com/plexinc/plex-slack-music-notifications/releases/download/helm-chart-0.1.1/music-notifications-0.1.1.tgz
     version: 0.1.1
-generated: "2024-07-02T19:29:10.523806824Z"
+generated: "2024-07-18T16:54:51.921340137Z"
