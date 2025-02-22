@@ -1,6 +1,14 @@
 .git
-*Dockerfile*
-*docker-compose*
+.github
+.gitignore
+
+charts
+
+Dockerfile
+.dockerignore
+
 node_modules
+
 .idea
+.vscode
 .env
