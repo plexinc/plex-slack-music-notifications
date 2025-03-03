@@ -17,6 +17,8 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: plexinc/slack-music-notifications
+          labels: |
+            org.opencontainers.image.vendor=Plex, GmbH
           flavor: |
             latest=false
           tags: |

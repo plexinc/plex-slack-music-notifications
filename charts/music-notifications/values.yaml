@@ -1,46 +1,50 @@
-# The docker image information for the slack-music-notifications application
+# -- The docker image information for the slack-music-notifications application
 image:
   registry: index.docker.io
   repository: plexinc/slack-music-notifications
   # If unset use "latest"
-  tag: "latest"
-  sha: ""
+  tag: latest
+  sha: ''
   pullPolicy: IfNotPresent
 
 ingress:
-  # Specify if an ingress resource should be created or not
+  # -- Specify if an ingress resource should be created or not
   enabled: false
 
-  # The ingress class that should be used
-  ingressClassName: "ingress-nginx"
+  # -- The ingress class that should be used
+  ingressClassName: ingress-nginx
 
-  # The url to use for the ingress reverse proxy to point at this pms instance
-  url: ""
+  # -- The url to use for the ingress reverse proxy to point at this pms instance
+  url: ''
 
-  # Custom annotations to put on the ingress resource
+  # -- Custom annotations to put on the ingress resource
   annotations: {}
 
 secret:
+  # -- The source key to be loaded by external secret, if this is not set then an
+  # external secret will not be loaded
   externalSecretKey: ''
 
-  # Custom annotations on the secret
+  # -- Custom annotations on the secret
   # this is only used for the external secrets
   annotations: {}
 
-  # this is only used for the external secrets
+  # -- The external secret reference that the secret key should be laoded from
   secretStore:
     name: ''
     kind: ''
 
-  # use this to set the values of the secrets directly
+  # -- use this to set the values of the secrets directly
   # these values will be mounted as environment variables and should be base64 encoded
   data: {}
   #  SLACK_APP_CLIENT_ID
   #  SLACK_APP_CLIENT_SECRET
   #  SLACK_APP_SIGNING_SECRET
 
+# -- The number of instances of the app that should be run
 replicaCount: 1
 
+# --  The resource requests and limits that will be passed directly to the deployment
 resources:
   limits:
     cpu: 100m
@@ -57,17 +61,17 @@ resources:
 #   memory: 128Mi
 
 imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: ''
+fullnameOverride: ''
 
 service:
   type: ClusterIP
   port: 3000
 
-  # Port to use when type of service is "NodePort" (3000 by default)
-  # nodePort: 3000
+  # -- Port to use when type of service is "NodePort" (3000 by default)
+  nodePort: 3000
 
-  # optional extra annotations to add to the service resource
+  # -- Optional extra annotations to add to the service resource
   annotations: {}
 
 nodeSelector: {}
@@ -76,11 +80,12 @@ tolerations: []
 
 affinity: {}
 
-priorityClassName: ""
+priorityClassName: ''
 
-# Common Labels for all resources created by this chart.
+# -- Common Labels for all resources created by this chart.
 commonLabels: {}
 
+# -- Extra environment variables that will be injected into the oid
 extraEnv: {}
 # extraEnv:
   # This claim is optional, and is only used for the first startup of PMS
