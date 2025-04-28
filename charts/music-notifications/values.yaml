@@ -63,6 +63,7 @@ resources:
 imagePullSecrets: []
 nameOverride: ''
 fullnameOverride: ''
+automountServiceAccountToken: false
 
 service:
   type: ClusterIP
