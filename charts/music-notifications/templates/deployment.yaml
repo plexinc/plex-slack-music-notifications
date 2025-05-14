@@ -23,6 +23,7 @@ spec:
       labels:
         {{- include "music-notifications.labels" . | nindent 8 }}
     spec:
+      automountServiceAccountToken: {{ .Values.automountServiceAccountToken }}
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
