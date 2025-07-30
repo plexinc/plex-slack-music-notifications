@@ -1,5 +1,5 @@
 {
-  "name": "plex-slack-music-notifications",
+  "name": "@plextv/plex-slack-music-notifications",
   "version": "2.0.0",
   "private": true,
   "engines": {
