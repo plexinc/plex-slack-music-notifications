@@ -15,7 +15,7 @@ jobs:
     permissions:
       contents: read  # for dorny/paths-filter to fetch a list of changed files
       pull-requests: read  # for dorny/paths-filter to read pull requests
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2604
     if: github.repository == 'plexinc/plex-slack-music-notifications'
     outputs:
       docs: ${{ steps.filter.outputs.docs }}
@@ -44,7 +44,7 @@ jobs:
 
   chart:
     name: Release Chart
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2604
 
     permissions:
       contents: write # needed to write releases
